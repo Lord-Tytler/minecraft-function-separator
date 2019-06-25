@@ -14,10 +14,10 @@ public class Separator {
 
     public Separator() throws Exception {
         reader = new BufferedReader(
-                new FileReader("C:\\Java\\JavaProjects\\minecraft-function-divider\\src\\assets\\2085logo.mcfunction"));
+                new FileReader("C:\\Java\\JavaProjects\\minecraft-function-separator\\src\\assets\\2085logo.mcfunction"));
         fileIndex = 1;
         writer = new BufferedWriter(new FileWriter(
-                "C:\\Java\\JavaProjects\\minecraft-function-divider\\output\\2085logo" + fileIndex + ".txt"));
+                "C:\\Java\\JavaProjects\\minecraft-function-separator\\output\\2085logo" + fileIndex + ".txt"));
 
         characters = 0;
         lines = 0;
@@ -33,12 +33,11 @@ public class Separator {
                 writer.write(line);
                 writer.newLine();
             } else {
-                System.out.println(characters - line.length());
-                System.out.println("File" + fileIndex + " lines: " + lines);
                 fileIndex++;
                 lines = 0;
+                writer.close();
                 writer = new BufferedWriter(new FileWriter(
-                        "C:\\Java\\JavaProjects\\minecraft-function-divider\\output\\2085logo" + fileIndex + ".txt"));
+                        "C:\\Java\\JavaProjects\\minecraft-function-separator\\output\\2085logo" + fileIndex + ".txt"));
                 characters = line.length();
                 writer.write(line);
                 writer.newLine();
@@ -46,7 +45,8 @@ public class Separator {
             line = reader.readLine();
             lines++;
         }
-        Verifier verifier = new Verifier(fileIndex);
-        verifier.verify();
+        System.out.println(fileIndex);
+        Converter converter = new Converter(fileIndex);
+        converter.convert();
     }
 }
