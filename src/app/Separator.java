@@ -9,7 +9,7 @@ import java.io.IOException;
 public class Separator {
     private BufferedReader reader;
     private BufferedWriter writer;
-    private int fileIndex, characters;
+    private int fileIndex, characters, lines;
     private String line;
 
     public Separator() throws Exception {
@@ -20,7 +20,9 @@ public class Separator {
                 "C:\\Java\\JavaProjects\\minecraft-function-divider\\output\\2085logo" + fileIndex + ".txt"));
 
         characters = 0;
+        lines = 0;
         line = reader.readLine();
+        lines++;
     }
 
 
@@ -32,7 +34,9 @@ public class Separator {
                 writer.newLine();
             } else {
                 System.out.println(characters - line.length());
+                System.out.println("File" + fileIndex + " lines: " + lines);
                 fileIndex++;
+                lines = 0;
                 writer = new BufferedWriter(new FileWriter(
                         "C:\\Java\\JavaProjects\\minecraft-function-divider\\output\\2085logo" + fileIndex + ".txt"));
                 characters = line.length();
@@ -40,6 +44,7 @@ public class Separator {
                 writer.newLine();
             }
             line = reader.readLine();
+            lines++;
         }
         Verifier verifier = new Verifier(fileIndex);
         verifier.verify();
